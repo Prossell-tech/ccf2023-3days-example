@@ -10,8 +10,5 @@
   "license": "ISC",
   "volta": {
     "node": "18.16.0"
-  },
-  "dependencies": {
-    "express": "^4.18.2"
   }
 }
