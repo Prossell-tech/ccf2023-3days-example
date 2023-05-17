@@ -1,0 +1,17 @@
+{
+  "name": "ccf2023-3days-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "volta": {
+    "node": "18.16.0"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
