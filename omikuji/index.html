@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <title>おみくじアプリ</title>
+</head>
+<body>
+<h1>おみくじアプリ</h1>
+<p id="result"></p>
+<button id="drawBtn">おみくじを引く</button>
+
+<script>
+  const drawBtn = document.getElementById('drawBtn');
+  const resultElement = document.getElementById('result');
+  const fortunes = [
+    "大吉",
+    "中吉",
+    "小吉",
+    "吉",
+    "凶",
+    "大凶"
+  ];
+
+  drawBtn.addEventListener('click', function() {
+    const randomIndex = Math.floor(Math.random() * fortunes.length);
+    const fortune = fortunes[randomIndex];
+    resultElement.textContent = "結果：" + fortune;
+  });
+</script>
+</body>
+</html>
