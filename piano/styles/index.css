@@ -1,0 +1,16 @@
+.key {
+    display: inline-block;
+    width: 50px;
+    height: 200px;
+    margin: 5px;
+    background-color: white;
+    border: 1px solid black;
+}
+.key.black {
+    background-color: black;
+    width: 30px;
+    height: 120px;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+}
