@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>電卓</title>
+    <link rel="stylesheet" type="text/css" href="styles/index.css">
+</head>
+<body>
+<div class="flex column center" style="width: 100vw">
+    <script src="scripts/index.js"></script>
+    <div class="flex center column">
+        <div style="display: grid; grid-template-columns: 50px 50px 50px">
+            <button onclick="timer.button1to9(1)">1</button>
+            <button onclick="timer.button1to9(2)">2</button>
+            <button onclick="timer.button1to9(3)">3</button>
+            <button onclick="timer.button1to9(4)">4</button>
+            <button onclick="timer.button1to9(5)">5</button>
+            <button onclick="timer.button1to9(6)">6</button>
+            <button onclick="timer.button1to9(7)">7</button>
+            <button onclick="timer.button1to9(8)">8</button>
+            <button onclick="timer.button1to9(9)">9</button>
+            <button onclick="timer.button0()">0</button>
+        </div>
+        <button onclick="timer.buttonStart()">カウントダウン開始</button>
+        <p id="indicator"></p>
+    </div>
+</div>
+</body>
+</html>
