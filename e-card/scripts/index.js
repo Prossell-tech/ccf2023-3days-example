@@ -34,6 +34,11 @@ class ECard {
     } else if (this.field.player === 'slave'){
       this.winner = this.field.computer === 'emperor' ? 'player' : 'computer'
     }
+    if (this.field.computer === 'emperor'){
+      this.winner = this.field.player === 'slave' ?  'player' : 'computer'
+    } else if (this.field.computer === 'slave'){
+      this.winner = this.field.player === 'emperor' ? 'computer' : 'player'
+    }
   }
   clearField () {
     this.field.player = null
