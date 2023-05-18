@@ -1,1 +1,0 @@
-const handleClick = () => alert('クリックしましたね！')
