@@ -1,10 +1,10 @@
-function drawCircle(context, centerX, centerY, radius) {
+const drawCircle = (context, centerX, centerY, radius) => {
   context.beginPath();
   context.arc(centerX, centerY, radius, 0, 2 * Math.PI);
   context.stroke();
 }
 
-function drawSquare(context, centerX, centerY, sideLength) {
+const drawSquare = (context, centerX, centerY, sideLength) => {
   const halfLength = sideLength / 2;
   const x = centerX - halfLength;
   const y = centerY - halfLength;
@@ -14,14 +14,14 @@ function drawSquare(context, centerX, centerY, sideLength) {
   context.stroke();
 }
 
-function drawPoint(context, x, y, color) {
+const drawPoint = (context, x, y, color) => {
   context.beginPath();
   context.arc(x, y, 2, 0, 2 * Math.PI);
   context.fillStyle = color;
   context.fill();
 }
 
-function calculatePi(numPoints) {
+const calculatePi = (numPoints) => {
   const canvas = document.getElementById("canvas");
   const context = canvas.getContext("2d");
 
@@ -32,7 +32,7 @@ function calculatePi(numPoints) {
   let pointsInsideCircle = 0;
   let pointsOutsideCircle = 0;
 
-  function drawNextPoint() {
+  const drawNextPoint = () => {
     if (pointsInsideCircle + pointsOutsideCircle === numPoints) {
       const approximatePi = (4 * pointsInsideCircle) / numPoints;
       document.getElementById("pi-result").innerText = "円周率の近似値: " + approximatePi;
@@ -58,7 +58,7 @@ function calculatePi(numPoints) {
   drawNextPoint();
 }
 
-window.addEventListener("load", function() {
+window.addEventListener("load", () => {
   // 正方形と円を描画
   const canvas = document.getElementById("canvas");
   const context = canvas.getContext("2d");
@@ -73,7 +73,7 @@ window.addEventListener("load", function() {
 
   // 「計算を開始」ボタンのonclickを定義
   const startButton = document.getElementById("startButton");
-  startButton.addEventListener("click", function() {
+  startButton.addEventListener("click", () => {
     const numPoints = +document.getElementById('num-points').value;
     if (numPoints < 1){
       return alert('正の整数を入力してください')
