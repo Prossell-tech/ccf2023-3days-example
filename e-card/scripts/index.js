@@ -69,8 +69,6 @@ class ECard {
       const cardContainer = document.createElement('div')
       const cardImg = document.createElement('img')
       cardImg.src = `images/card.png`
-      cardImg.width = 100
-      cardImg.height = 100
       cardContainer.appendChild(cardImg)
       computerCardsContainer.appendChild(cardContainer)
     })
@@ -79,8 +77,6 @@ class ECard {
       cardContainer.onclick = () => this.playCard('player', cardIdx)
       const cardImg = document.createElement('img')
       cardImg.src = `images/${card}.png`
-      cardImg.width = 100
-      cardImg.height = 100
       cardContainer.appendChild(cardImg)
       playerCardsContainer.appendChild(cardContainer)
     })
@@ -88,13 +84,9 @@ class ECard {
     if (this.field.computer) {
       computerFieldCardImg.src = `images/${this.field.computer}.png`
     }
-    computerFieldCardImg.width = 100
-    computerFieldCardImg.height = 100
     computerFieldCardContainer.appendChild(computerFieldCardImg)
     const playerFieldCardImg = document.createElement('img')
     if (this.field.player) playerFieldCardImg.src = `images/${this.field.player}.png`
-    playerFieldCardImg.width = 100
-    playerFieldCardImg.height = 100
     playerFieldCardContainer.appendChild(playerFieldCardImg)
   }
 
