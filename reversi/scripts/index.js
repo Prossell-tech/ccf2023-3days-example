@@ -1,4 +1,4 @@
-const PLAYER_STONE = 1  // 1: 白、 2: 黒
+const PLAYER_STONE = 2  // 1: 白、 2: 黒
 const FIELD_SIZE_VERTICAL = 8
 const FIELD_SIZE_HORIZONTAL = 8
 const INIT_WHITE_LOCATIONS = [
@@ -286,6 +286,8 @@ class Reversi {
       this.stage[loc.vertical][loc.horizontal] = this.latestStone.playerNum
     }
   }
+
+
 
   // ---------------------DOM操作系------------------------
   emptyCellRowContainer() {
