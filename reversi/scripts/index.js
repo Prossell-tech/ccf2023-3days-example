@@ -169,6 +169,16 @@ class Reversi {
     }
   }
 
+  render(){
+
+    for (let h = 0; h < FIELD_SIZE_HORIZONTAL; h++) {
+      for (let v = 0; v < FIELD_SIZE_VERTICAL; v++) {
+        const cell = document.createElement('div')
+        cell.className = 'flex'
+      }
+    }
+  }
+
 
 
   mainLoop(){
