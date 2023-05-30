@@ -174,7 +174,10 @@ class Reversi {
         const isEnemyStone = searchedStone !== 0 && searchedStone !== this.latestStone.playerNum
         if (isEnemyStone) {
           hasFoundEnemyStone = true
-          searchedLocsPerLine.push({vertical: this.latestStone.loc.vertical + offset, horizontal: this.latestStone.loc.horizontal + offset})
+          searchedLocsPerLine.push({
+            vertical: this.latestStone.loc.vertical + offset,
+            horizontal: this.latestStone.loc.horizontal + offset
+          })
         } else {
           break
         }
@@ -187,7 +190,10 @@ class Reversi {
           reversibleStoneLocs.push(...searchedLocsPerLine)
         } else {
           // 敵の色だったら
-          searchedLocsPerLine.push({vertical: this.latestStone.loc.vertical + offset, horizontal: this.latestStone.loc.horizontal + offset})
+          searchedLocsPerLine.push({
+            vertical: this.latestStone.loc.vertical + offset,
+            horizontal: this.latestStone.loc.horizontal + offset
+          })
         }
       }
       offset++
@@ -202,7 +208,10 @@ class Reversi {
         const isEnemyStone = searchedStone !== 0 && searchedStone !== this.latestStone.playerNum
         if (isEnemyStone) {
           hasFoundEnemyStone = true
-          searchedLocsPerLine.push({vertical: this.latestStone.loc.vertical - offset, horizontal: this.latestStone.loc.horizontal - offset})
+          searchedLocsPerLine.push({
+            vertical: this.latestStone.loc.vertical - offset,
+            horizontal: this.latestStone.loc.horizontal - offset
+          })
         } else {
           break
         }
@@ -215,7 +224,10 @@ class Reversi {
           reversibleStoneLocs.push(...searchedLocsPerLine)
         } else {
           // 敵の色だったら
-          searchedLocsPerLine.push({vertical: this.latestStone.loc.vertical - offset, horizontal: this.latestStone.loc.horizontal - offset})
+          searchedLocsPerLine.push({
+            vertical: this.latestStone.loc.vertical - offset,
+            horizontal: this.latestStone.loc.horizontal - offset
+          })
         }
       }
       offset++
@@ -230,7 +242,10 @@ class Reversi {
         const isEnemyStone = searchedStone !== 0 && searchedStone !== this.latestStone.playerNum
         if (isEnemyStone) {
           hasFoundEnemyStone = true
-          searchedLocsPerLine.push({vertical: this.latestStone.loc.vertical + offset, horizontal: this.latestStone.loc.horizontal - offset})
+          searchedLocsPerLine.push({
+            vertical: this.latestStone.loc.vertical + offset,
+            horizontal: this.latestStone.loc.horizontal - offset
+          })
         } else {
           break
         }
@@ -243,7 +258,10 @@ class Reversi {
           reversibleStoneLocs.push(...searchedLocsPerLine)
         } else {
           // 敵の色だったら
-          searchedLocsPerLine.push({vertical: this.latestStone.loc.vertical + offset, horizontal: this.latestStone.loc.horizontal - offset})
+          searchedLocsPerLine.push({
+            vertical: this.latestStone.loc.vertical + offset,
+            horizontal: this.latestStone.loc.horizontal - offset
+          })
         }
       }
       offset++
@@ -258,7 +276,10 @@ class Reversi {
         const isEnemyStone = searchedStone !== 0 && searchedStone !== this.latestStone.playerNum
         if (isEnemyStone) {
           hasFoundEnemyStone = true
-          searchedLocsPerLine.push({vertical: this.latestStone.loc.vertical - offset, horizontal: this.latestStone.loc.horizontal + offset})
+          searchedLocsPerLine.push({
+            vertical: this.latestStone.loc.vertical - offset,
+            horizontal: this.latestStone.loc.horizontal + offset
+          })
         } else {
           break
         }
@@ -271,7 +292,10 @@ class Reversi {
           reversibleStoneLocs.push(...searchedLocsPerLine)
         } else {
           // 敵の色だったら
-          searchedLocsPerLine.push({vertical: this.latestStone.loc.vertical - offset, horizontal: this.latestStone.loc.horizontal + offset})
+          searchedLocsPerLine.push({
+            vertical: this.latestStone.loc.vertical - offset,
+            horizontal: this.latestStone.loc.horizontal + offset
+          })
         }
       }
       offset++
@@ -286,7 +310,6 @@ class Reversi {
       this.stage[loc.vertical][loc.horizontal] = this.latestStone.playerNum
     }
   }
-
 
 
   // ---------------------DOM操作系------------------------
