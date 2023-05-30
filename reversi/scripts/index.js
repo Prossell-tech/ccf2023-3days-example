@@ -52,30 +52,36 @@ class Reversi {
     }
   }
 
+  canSetStone(playerNum, loc){
+    const isVerticalOk = 0 <= loc.vertical < FIELD_SIZE_VERTICAL
+    const isHorizontalOk = 0 <= loc.horizontal < FIELD_SIZE_HORIZONTAL
+    const isPlayerNumOk = playerNum === 1 || playerNum === 2
+    const isAlreadyExists = this.stage[loc.vertical][loc.horizontal] !== 0
+    const canReverse = this.searchReversibleStoneLocs(playerNum, loc).length !== 0
+    return isVerticalOk && isHorizontalOk && isPlayerNumOk && !isAlreadyExists && canReverse
+  }
+
   setStone(playerNum, loc) {
-    console.assert(0 <= loc.vertical < FIELD_SIZE_VERTICAL)
-    console.assert(0 <= loc.horizontal < FIELD_SIZE_HORIZONTAL)
-    console.assert(playerNum === 1 || playerNum === 2)
-    console.assert(this.stage[loc.vertical][loc.horizontal] === 0)
+    console.assert(this.canSetStone(playerNum, loc))
     this.stage[loc.vertical][loc.horizontal] = playerNum
     this.latestStone = {loc, playerNum}
   }
 
-  searchReversibleStoneLocs() {
-    console.assert(this.latestStone.playerNum !== undefined)
-    console.assert(this.latestStone.loc.vertical !== undefined)
-    console.assert(this.latestStone.loc.horizontal !== undefined)
+  searchReversibleStoneLocs(playerNum = this.latestStone.playerNum, loc = this.latestStone.loc) {
+    console.assert(playerNum !== undefined)
+    console.assert(loc.vertical !== undefined)
+    console.assert(loc.horizontal !== undefined)
     const reversibleStoneLocs = []
     // 右方向に走査
     let hasFoundEnemyStone = false
     let searchedLocsPerLine = []
-    for (let h = this.latestStone.loc.horizontal + 1; h < FIELD_SIZE_HORIZONTAL; h++) {
-      const searchedStone = this.stage[this.latestStone.loc.vertical][h]
+    for (let h = loc.horizontal + 1; h < FIELD_SIZE_HORIZONTAL; h++) {
+      const searchedStone = this.stage[loc.vertical][h]
       if (!hasFoundEnemyStone) {
-        const isEnemyStone = searchedStone !== 0 && searchedStone !== this.latestStone.playerNum
+        const isEnemyStone = searchedStone !== 0 && searchedStone !== playerNum
         if (isEnemyStone) {
           hasFoundEnemyStone = true
-          searchedLocsPerLine.push({vertical: this.latestStone.loc.vertical, horizontal: h})
+          searchedLocsPerLine.push({vertical: loc.vertical, horizontal: h})
         } else {
           break
         }
@@ -83,25 +89,25 @@ class Reversi {
         if (searchedStone === 0) {
           // 何も置かれていなかったら
           break
-        } else if (searchedStone === this.latestStone.playerNum) {
+        } else if (searchedStone === playerNum) {
           // 自分の色だったら
           reversibleStoneLocs.push(...searchedLocsPerLine)
         } else {
           // 敵の色だったら
-          searchedLocsPerLine.push({vertical: this.latestStone.loc.vertical, horizontal: h})
+          searchedLocsPerLine.push({vertical: loc.vertical, horizontal: h})
         }
       }
     }
     // 左方向に走査
     hasFoundEnemyStone = false
     searchedLocsPerLine = []
-    for (let h = this.latestStone.loc.horizontal - 1; h >= 0; h--) {
-      const searchedStone = this.stage[this.latestStone.loc.vertical][h]
+    for (let h = loc.horizontal - 1; h >= 0; h--) {
+      const searchedStone = this.stage[loc.vertical][h]
       if (!hasFoundEnemyStone) {
-        const isEnemyStone = searchedStone !== 0 && searchedStone !== this.latestStone.playerNum
+        const isEnemyStone = searchedStone !== 0 && searchedStone !== playerNum
         if (isEnemyStone) {
           hasFoundEnemyStone = true
-          searchedLocsPerLine.push({vertical: this.latestStone.loc.vertical, horizontal: h})
+          searchedLocsPerLine.push({vertical: loc.vertical, horizontal: h})
         } else {
           break
         }
@@ -109,25 +115,25 @@ class Reversi {
         if (searchedStone === 0) {
           // 何も置かれていなかったら
           break
-        } else if (searchedStone === this.latestStone.playerNum) {
+        } else if (searchedStone === playerNum) {
           // 自分の色だったら
           reversibleStoneLocs.push(...searchedLocsPerLine)
         } else {
           // 敵の色だったら
-          searchedLocsPerLine.push({vertical: this.latestStone.loc.vertical, horizontal: h})
+          searchedLocsPerLine.push({vertical: loc.vertical, horizontal: h})
         }
       }
     }
     // 下方向に走査
     hasFoundEnemyStone = false
     searchedLocsPerLine = []
-    for (let v = this.latestStone.loc.vertical + 1; v < FIELD_SIZE_VERTICAL; v++) {
-      const searchedStone = this.stage[v][this.latestStone.loc.horizontal]
+    for (let v = loc.vertical + 1; v < FIELD_SIZE_VERTICAL; v++) {
+      const searchedStone = this.stage[v][loc.horizontal]
       if (!hasFoundEnemyStone) {
-        const isEnemyStone = searchedStone !== 0 && searchedStone !== this.latestStone.playerNum
+        const isEnemyStone = searchedStone !== 0 && searchedStone !== playerNum
         if (isEnemyStone) {
           hasFoundEnemyStone = true
-          searchedLocsPerLine.push({vertical: v, horizontal: this.latestStone.loc.horizontal})
+          searchedLocsPerLine.push({vertical: v, horizontal: loc.horizontal})
         } else {
           break
         }
@@ -135,25 +141,25 @@ class Reversi {
         if (searchedStone === 0) {
           // 何も置かれていなかったら
           break
-        } else if (searchedStone === this.latestStone.playerNum) {
+        } else if (searchedStone === playerNum) {
           // 自分の色だったら
           reversibleStoneLocs.push(...searchedLocsPerLine)
         } else {
           // 敵の色だったら
-          searchedLocsPerLine.push({vertical: v, horizontal: this.latestStone.loc.horizontal})
+          searchedLocsPerLine.push({vertical: v, horizontal: loc.horizontal})
         }
       }
     }
     // 上方向に走査
     hasFoundEnemyStone = false
     searchedLocsPerLine = []
-    for (let v = this.latestStone.loc.vertical - 1; v >= 0; v--) {
-      const searchedStone = this.stage[v][this.latestStone.loc.horizontal]
+    for (let v = loc.vertical - 1; v >= 0; v--) {
+      const searchedStone = this.stage[v][loc.horizontal]
       if (!hasFoundEnemyStone) {
-        const isEnemyStone = searchedStone !== 0 && searchedStone !== this.latestStone.playerNum
+        const isEnemyStone = searchedStone !== 0 && searchedStone !== playerNum
         if (isEnemyStone) {
           hasFoundEnemyStone = true
-          searchedLocsPerLine.push({vertical: v, horizontal: this.latestStone.loc.horizontal})
+          searchedLocsPerLine.push({vertical: v, horizontal: loc.horizontal})
         } else {
           break
         }
@@ -161,12 +167,12 @@ class Reversi {
         if (searchedStone === 0) {
           // 何も置かれていなかったら
           break
-        } else if (searchedStone === this.latestStone.playerNum) {
+        } else if (searchedStone === playerNum) {
           // 自分の色だったら
           reversibleStoneLocs.push(...searchedLocsPerLine)
         } else {
           // 敵の色だったら
-          searchedLocsPerLine.push({vertical: v, horizontal: this.latestStone.loc.horizontal})
+          searchedLocsPerLine.push({vertical: v, horizontal: loc.horizontal})
         }
       }
     }
@@ -175,15 +181,15 @@ class Reversi {
     hasFoundEnemyStone = false
     searchedLocsPerLine = []
     let offset = 1
-    while (this.latestStone.loc.vertical + offset < FIELD_SIZE_VERTICAL && this.latestStone.loc.horizontal + offset < FIELD_SIZE_HORIZONTAL) {
-      const searchedStone = this.stage[this.latestStone.loc.vertical + offset][this.latestStone.loc.horizontal + offset]
+    while (loc.vertical + offset < FIELD_SIZE_VERTICAL && loc.horizontal + offset < FIELD_SIZE_HORIZONTAL) {
+      const searchedStone = this.stage[loc.vertical + offset][loc.horizontal + offset]
       if (!hasFoundEnemyStone) {
-        const isEnemyStone = searchedStone !== 0 && searchedStone !== this.latestStone.playerNum
+        const isEnemyStone = searchedStone !== 0 && searchedStone !== playerNum
         if (isEnemyStone) {
           hasFoundEnemyStone = true
           searchedLocsPerLine.push({
-            vertical: this.latestStone.loc.vertical + offset,
-            horizontal: this.latestStone.loc.horizontal + offset
+            vertical: loc.vertical + offset,
+            horizontal: loc.horizontal + offset
           })
         } else {
           break
@@ -192,14 +198,14 @@ class Reversi {
         if (searchedStone === 0) {
           // 何も置かれていなかったら
           break
-        } else if (searchedStone === this.latestStone.playerNum) {
+        } else if (searchedStone === playerNum) {
           // 自分の色だったら
           reversibleStoneLocs.push(...searchedLocsPerLine)
         } else {
           // 敵の色だったら
           searchedLocsPerLine.push({
-            vertical: this.latestStone.loc.vertical + offset,
-            horizontal: this.latestStone.loc.horizontal + offset
+            vertical: loc.vertical + offset,
+            horizontal: loc.horizontal + offset
           })
         }
       }
@@ -209,15 +215,15 @@ class Reversi {
     hasFoundEnemyStone = false
     searchedLocsPerLine = []
     offset = 1
-    while (this.latestStone.loc.vertical - offset >= 0 && this.latestStone.loc.horizontal - offset >= 0) {
-      const searchedStone = this.stage[this.latestStone.loc.vertical - offset][this.latestStone.loc.horizontal - offset]
+    while (loc.vertical - offset >= 0 && loc.horizontal - offset >= 0) {
+      const searchedStone = this.stage[loc.vertical - offset][loc.horizontal - offset]
       if (!hasFoundEnemyStone) {
-        const isEnemyStone = searchedStone !== 0 && searchedStone !== this.latestStone.playerNum
+        const isEnemyStone = searchedStone !== 0 && searchedStone !== playerNum
         if (isEnemyStone) {
           hasFoundEnemyStone = true
           searchedLocsPerLine.push({
-            vertical: this.latestStone.loc.vertical - offset,
-            horizontal: this.latestStone.loc.horizontal - offset
+            vertical: loc.vertical - offset,
+            horizontal: loc.horizontal - offset
           })
         } else {
           break
@@ -226,14 +232,14 @@ class Reversi {
         if (searchedStone === 0) {
           // 何も置かれていなかったら
           break
-        } else if (searchedStone === this.latestStone.playerNum) {
+        } else if (searchedStone === playerNum) {
           // 自分の色だったら
           reversibleStoneLocs.push(...searchedLocsPerLine)
         } else {
           // 敵の色だったら
           searchedLocsPerLine.push({
-            vertical: this.latestStone.loc.vertical - offset,
-            horizontal: this.latestStone.loc.horizontal - offset
+            vertical: loc.vertical - offset,
+            horizontal: loc.horizontal - offset
           })
         }
       }
@@ -243,15 +249,15 @@ class Reversi {
     hasFoundEnemyStone = false
     searchedLocsPerLine = []
     offset = 1
-    while (this.latestStone.loc.vertical + offset < FIELD_SIZE_VERTICAL && this.latestStone.loc.horizontal - offset >= 0) {
-      const searchedStone = this.stage[this.latestStone.loc.vertical + offset][this.latestStone.loc.horizontal - offset]
+    while (loc.vertical + offset < FIELD_SIZE_VERTICAL && loc.horizontal - offset >= 0) {
+      const searchedStone = this.stage[loc.vertical + offset][loc.horizontal - offset]
       if (!hasFoundEnemyStone) {
-        const isEnemyStone = searchedStone !== 0 && searchedStone !== this.latestStone.playerNum
+        const isEnemyStone = searchedStone !== 0 && searchedStone !== playerNum
         if (isEnemyStone) {
           hasFoundEnemyStone = true
           searchedLocsPerLine.push({
-            vertical: this.latestStone.loc.vertical + offset,
-            horizontal: this.latestStone.loc.horizontal - offset
+            vertical: loc.vertical + offset,
+            horizontal: loc.horizontal - offset
           })
         } else {
           break
@@ -260,14 +266,14 @@ class Reversi {
         if (searchedStone === 0) {
           // 何も置かれていなかったら
           break
-        } else if (searchedStone === this.latestStone.playerNum) {
+        } else if (searchedStone === playerNum) {
           // 自分の色だったら
           reversibleStoneLocs.push(...searchedLocsPerLine)
         } else {
           // 敵の色だったら
           searchedLocsPerLine.push({
-            vertical: this.latestStone.loc.vertical + offset,
-            horizontal: this.latestStone.loc.horizontal - offset
+            vertical: loc.vertical + offset,
+            horizontal: loc.horizontal - offset
           })
         }
       }
@@ -277,15 +283,15 @@ class Reversi {
     hasFoundEnemyStone = false
     searchedLocsPerLine = []
     offset = 1
-    while (this.latestStone.loc.vertical - offset >= 0 && this.latestStone.loc.horizontal + offset < FIELD_SIZE_HORIZONTAL) {
-      const searchedStone = this.stage[this.latestStone.loc.vertical - offset][this.latestStone.loc.horizontal + offset]
+    while (loc.vertical - offset >= 0 && loc.horizontal + offset < FIELD_SIZE_HORIZONTAL) {
+      const searchedStone = this.stage[loc.vertical - offset][loc.horizontal + offset]
       if (!hasFoundEnemyStone) {
-        const isEnemyStone = searchedStone !== 0 && searchedStone !== this.latestStone.playerNum
+        const isEnemyStone = searchedStone !== 0 && searchedStone !== playerNum
         if (isEnemyStone) {
           hasFoundEnemyStone = true
           searchedLocsPerLine.push({
-            vertical: this.latestStone.loc.vertical - offset,
-            horizontal: this.latestStone.loc.horizontal + offset
+            vertical: loc.vertical - offset,
+            horizontal: loc.horizontal + offset
           })
         } else {
           break
@@ -294,14 +300,14 @@ class Reversi {
         if (searchedStone === 0) {
           // 何も置かれていなかったら
           break
-        } else if (searchedStone === this.latestStone.playerNum) {
+        } else if (searchedStone === playerNum) {
           // 自分の色だったら
           reversibleStoneLocs.push(...searchedLocsPerLine)
         } else {
           // 敵の色だったら
           searchedLocsPerLine.push({
-            vertical: this.latestStone.loc.vertical - offset,
-            horizontal: this.latestStone.loc.horizontal + offset
+            vertical: loc.vertical - offset,
+            horizontal: loc.horizontal + offset
           })
         }
       }
@@ -319,9 +325,14 @@ class Reversi {
   }
 
   playByComputer() {
-    const v = getRandInt(FIELD_SIZE_VERTICAL)
-    const h = getRandInt(FIELD_SIZE_HORIZONTAL)
-    this.setStone(flip1and2(PLAYER_STONE), {vertical: v, horizontal: h})
+    while (true) {
+      const v = getRandInt(FIELD_SIZE_VERTICAL)
+      const h = getRandInt(FIELD_SIZE_HORIZONTAL)
+      if (this.canSetStone(flip1and2(PLAYER_STONE), {vertical: v, horizontal: h})) {
+        this.setStone(flip1and2(PLAYER_STONE), {vertical: v, horizontal: h})
+        break
+      }
+    }
   }
 
 
