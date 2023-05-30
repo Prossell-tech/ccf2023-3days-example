@@ -95,6 +95,7 @@ class Reversi {
         } else {
           // 敵の色だったら
           searchedLocsPerLine.push({vertical: loc.vertical, horizontal: h})
+          break
         }
       }
     }
@@ -121,6 +122,7 @@ class Reversi {
         } else {
           // 敵の色だったら
           searchedLocsPerLine.push({vertical: loc.vertical, horizontal: h})
+          break
         }
       }
     }
@@ -147,6 +149,7 @@ class Reversi {
         } else {
           // 敵の色だったら
           searchedLocsPerLine.push({vertical: v, horizontal: loc.horizontal})
+          break
         }
       }
     }
@@ -173,6 +176,7 @@ class Reversi {
         } else {
           // 敵の色だったら
           searchedLocsPerLine.push({vertical: v, horizontal: loc.horizontal})
+          break
         }
       }
     }
@@ -207,6 +211,7 @@ class Reversi {
             vertical: loc.vertical + offset,
             horizontal: loc.horizontal + offset
           })
+          break
         }
       }
       offset++
@@ -241,6 +246,7 @@ class Reversi {
             vertical: loc.vertical - offset,
             horizontal: loc.horizontal - offset
           })
+          break
         }
       }
       offset++
@@ -275,6 +281,7 @@ class Reversi {
             vertical: loc.vertical + offset,
             horizontal: loc.horizontal - offset
           })
+          break
         }
       }
       offset++
@@ -309,6 +316,7 @@ class Reversi {
             vertical: loc.vertical - offset,
             horizontal: loc.horizontal + offset
           })
+          break
         }
       }
       offset++
