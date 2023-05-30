@@ -64,9 +64,8 @@ class Reversi {
       const searchedStone = this.stage[this.latestStone.loc.vertical][h]
       if (searchedStone === 0 || searchedStone === this.latestStone.playerNum) {
         break
-      } else {
-        reversibleStoneLocs.push({vertical: this.latestStone.loc.vertical, horizontal: h})
       }
+      reversibleStoneLocs.push({vertical: this.latestStone.loc.vertical, horizontal: h})
     }
     // 左方向に走査
     for (let h = this.latestStone.loc.horizontal - 1; h >= 0; h--) {
@@ -74,18 +73,15 @@ class Reversi {
       if (searchedStone === 0 || searchedStone === this.latestStone.playerNum) {
         break
       }
-      {
-        reversibleStoneLocs.push({vertical: this.latestStone.loc.vertical, horizontal: h})
-      }
+      reversibleStoneLocs.push({vertical: this.latestStone.loc.vertical, horizontal: h})
     }
     // 下方向に走査
     for (let v = this.latestStone.loc.vertical - 1; v < FIELD_SIZE_VERTICAL; v++) {
       const searchedStone = this.stage[v][this.latestStone.loc.horizontal]
       if (searchedStone === 0 || searchedStone === this.latestStone.playerNum) {
         break
-      } else {
-        reversibleStoneLocs.push({vertical: v, horizontal: this.latestStone.loc.horizontal})
       }
+      reversibleStoneLocs.push({vertical: v, horizontal: this.latestStone.loc.horizontal})
     }
     // 上方向に走査
     for (let v = this.latestStone.loc.vertical + 1; v >= 0; v--) {
@@ -93,9 +89,7 @@ class Reversi {
       if (searchedStone === 0 || searchedStone === this.latestStone.playerNum) {
         break
       }
-      {
-        reversibleStoneLocs.push({vertical: v, horizontal: this.latestStone.loc.horizontal})
-      }
+      reversibleStoneLocs.push({vertical: v, horizontal: this.latestStone.loc.horizontal})
     }
 
     // 右下に走査
@@ -118,12 +112,10 @@ class Reversi {
       if (searchedStone === 0 || searchedStone === this.latestStone.playerNum) {
         break
       }
-
       reversibleStoneLocs.push({
         vertical: this.latestStone.loc.vertical - offset,
         horizontal: this.latestStone.loc.horizontal - offset
       })
-
       offset++
     }
     // 左下に走査
@@ -133,12 +125,10 @@ class Reversi {
       if (searchedStone === 0 || searchedStone === this.latestStone.playerNum) {
         break
       }
-
       reversibleStoneLocs.push({
         vertical: this.latestStone.loc.vertical + offset,
         horizontal: this.latestStone.loc.horizontal - offset
       })
-
       offset++
     }
     // 右上に走査
@@ -148,12 +138,10 @@ class Reversi {
       if (searchedStone === 0 || searchedStone === this.latestStone.playerNum) {
         break
       }
-
       reversibleStoneLocs.push({
         vertical: this.latestStone.loc.vertical - offset,
         horizontal: this.latestStone.loc.horizontal + offset
       })
-
       offset++
     }
 
@@ -167,7 +155,7 @@ class Reversi {
     }
   }
 
-  // DOM操作系
+  // ---------------------DOM操作系------------------------
   emptyCellRowContainer() {
     const cellRowContainer = document.getElementById('cell-row-container')
     cellRowContainer.innerText = ''
