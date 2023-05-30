@@ -17,6 +17,13 @@ div.flex {
     border-width: 1px;
     border-color: black;
     margin: 1px;
+}
+
+.not-allowed {
+    cursor: not-allowed;
+}
+
+.pointer {
     cursor: pointer;
 }
 

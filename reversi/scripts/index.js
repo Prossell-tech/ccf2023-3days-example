@@ -356,9 +356,11 @@ class Reversi {
       const cellRow = document.createElement('div')
       cellRow.className = 'flex'
       for (let h = 0; h < FIELD_SIZE_HORIZONTAL; h++) {
+        const isAvailable = this.canSetStone(PLAYER_STONE, {vertical: v, horizontal: h})
         const cell = document.createElement('div')
-        cell.className = 'cell'
+        cell.className = `cell + ${isAvailable ? 'pointer' : 'not-allowed'}`
         cell.onclick = async () => {
+          if (!isAvailable) return
           this.setStone(PLAYER_STONE, {vertical: v, horizontal: h})
           this.reverse()
           this.emptyCellRowContainer()
