@@ -328,9 +328,9 @@ class Reversi {
   }
 }
 
-const field = new Reversi()
+const reversi = new Reversi()
 
 
 window.addEventListener('load', () => {
-  field.renderStage()
+  reversi.renderStage()
 })
