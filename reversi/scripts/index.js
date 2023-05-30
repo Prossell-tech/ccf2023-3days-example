@@ -121,7 +121,7 @@ class Reversi {
     // 下方向に走査
     hasFoundEnemyStone = false
     searchedLocsPerLine = []
-    for (let v = this.latestStone.loc.vertical - 1; v < FIELD_SIZE_VERTICAL; v++) {
+    for (let v = this.latestStone.loc.vertical + 1; v < FIELD_SIZE_VERTICAL; v++) {
       const searchedStone = this.stage[v][this.latestStone.loc.horizontal]
       if (!hasFoundEnemyStone) {
         const isEnemyStone = searchedStone !== 0 && searchedStone !== this.latestStone.playerNum
@@ -147,7 +147,7 @@ class Reversi {
     // 上方向に走査
     hasFoundEnemyStone = false
     searchedLocsPerLine = []
-    for (let v = this.latestStone.loc.vertical + 1; v >= 0; v--) {
+    for (let v = this.latestStone.loc.vertical - 1; v >= 0; v--) {
       const searchedStone = this.stage[v][this.latestStone.loc.horizontal]
       if (!hasFoundEnemyStone) {
         const isEnemyStone = searchedStone !== 0 && searchedStone !== this.latestStone.playerNum
