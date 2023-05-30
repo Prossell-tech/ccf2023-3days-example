@@ -169,13 +169,24 @@ class Reversi {
     }
   }
 
-  render(){
-
-    for (let h = 0; h < FIELD_SIZE_HORIZONTAL; h++) {
-      for (let v = 0; v < FIELD_SIZE_VERTICAL; v++) {
+  renderStage(){
+    const cellRowContainer = document.getElementById('cell-row-container')
+    for (let v = 0; v < FIELD_SIZE_VERTICAL; v++)  {
+      const cellRow = document.createElement('div')
+      cellRow.className = 'flex'
+      for (let h = 0; h < FIELD_SIZE_HORIZONTAL; h++) {
         const cell = document.createElement('div')
-        cell.className = 'flex'
+        cell.className = 'cell'
+        const stoneImg = document.createElement('img')
+        if (this.stage[v][h] === 1){
+          stoneImg.src = 'images/game_reversi_white.png'
+        } else if (this.stage[v][h] === 2) {
+          stoneImg.src = 'images/game_reversi_black.png'
+        }
+        cell.appendChild(stoneImg)
+        cellRow.appendChild(cell)
       }
+      cellRowContainer.appendChild(cellRow)
     }
   }
 
@@ -187,3 +198,8 @@ class Reversi {
 }
 
 const field = new Reversi()
+
+
+window.addEventListener('load', () => {
+  field.renderStage()
+})
