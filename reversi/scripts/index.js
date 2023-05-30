@@ -1,3 +1,4 @@
+const COMPUTER_AWAIT_MS = 500
 const PLAYER_STONE = 2  // 1: 白、 2: 黒
 const FIELD_SIZE_VERTICAL = 8
 const FIELD_SIZE_HORIZONTAL = 8
@@ -21,6 +22,12 @@ const INIT_BLACK_LOCATIONS = [
     horizontal: 4
   },
 ]
+
+const getRandInt = (max) => Math.floor(Math.random() * max)
+const flip1and2 = (input) => {
+  if (input === 1) return 2
+  if (input === 2) return 1
+}
 
 
 class Reversi {
@@ -311,6 +318,12 @@ class Reversi {
     }
   }
 
+  playByComputer() {
+    const v = getRandInt(FIELD_SIZE_VERTICAL)
+    const h = getRandInt(FIELD_SIZE_HORIZONTAL)
+    this.setStone(flip1and2(PLAYER_STONE), {vertical: v, horizontal: h})
+  }
+
 
   // ---------------------DOM操作系------------------------
   emptyCellRowContainer() {
@@ -326,8 +339,13 @@ class Reversi {
       for (let h = 0; h < FIELD_SIZE_HORIZONTAL; h++) {
         const cell = document.createElement('div')
         cell.className = 'cell'
-        cell.onclick = () => {
+        cell.onclick = async () => {
           this.setStone(PLAYER_STONE, {vertical: v, horizontal: h})
+          this.reverse()
+          this.emptyCellRowContainer()
+          this.renderStage()
+          await new Promise(resolve => setTimeout(resolve, COMPUTER_AWAIT_MS));
+          this.playByComputer()
           this.reverse()
           this.emptyCellRowContainer()
           this.renderStage()
@@ -343,11 +361,6 @@ class Reversi {
       }
       cellRowContainer.appendChild(cellRow)
     }
-  }
-
-
-  mainLoop() {
-
   }
 }
 
