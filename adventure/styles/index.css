@@ -1,0 +1,51 @@
+.ground {
+    background-color: dodgerblue;
+}
+
+.cloud-container {
+    width: 100vw;
+    position: relative;
+}
+
+.cloud {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    position: absolute;
+}
+
+.ground-row-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+    bottom: 0;
+    height: 100vh;
+}
+
+.ground-row {
+    display: flex;
+    flex-direction: row;
+    gap: 0;
+}
+
+.ground {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin: 0;
+    padding: 0;
+}
+
+
+.landscape-container {
+    width: 100vw;
+    position: relative;
+    display: grid;
+}
+
+.landscape {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
