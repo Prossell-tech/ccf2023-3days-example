@@ -53,8 +53,8 @@ class Reversi {
   }
 
   canSetStone(playerNum, loc){
-    const isVerticalOk = 0 <= loc.vertical < FIELD_SIZE_VERTICAL
-    const isHorizontalOk = 0 <= loc.horizontal < FIELD_SIZE_HORIZONTAL
+    const isVerticalOk = 0 <= loc.vertical && loc.vertical < FIELD_SIZE_VERTICAL
+    const isHorizontalOk = 0 <= loc.horizontal && loc.horizontal < FIELD_SIZE_HORIZONTAL
     const isPlayerNumOk = playerNum === 1 || playerNum === 2
     const isAlreadyExists = this.stage[loc.vertical][loc.horizontal] !== 0
     const canReverse = this.searchReversibleStoneLocs(playerNum, loc).length !== 0
@@ -92,10 +92,10 @@ class Reversi {
         } else if (searchedStone === playerNum) {
           // 自分の色だったら
           reversibleStoneLocs.push(...searchedLocsPerLine)
+          break
         } else {
           // 敵の色だったら
           searchedLocsPerLine.push({vertical: loc.vertical, horizontal: h})
-          break
         }
       }
     }
@@ -119,10 +119,10 @@ class Reversi {
         } else if (searchedStone === playerNum) {
           // 自分の色だったら
           reversibleStoneLocs.push(...searchedLocsPerLine)
+          break
         } else {
           // 敵の色だったら
           searchedLocsPerLine.push({vertical: loc.vertical, horizontal: h})
-          break
         }
       }
     }
@@ -146,10 +146,10 @@ class Reversi {
         } else if (searchedStone === playerNum) {
           // 自分の色だったら
           reversibleStoneLocs.push(...searchedLocsPerLine)
+          break
         } else {
           // 敵の色だったら
           searchedLocsPerLine.push({vertical: v, horizontal: loc.horizontal})
-          break
         }
       }
     }
@@ -173,10 +173,10 @@ class Reversi {
         } else if (searchedStone === playerNum) {
           // 自分の色だったら
           reversibleStoneLocs.push(...searchedLocsPerLine)
+          break
         } else {
           // 敵の色だったら
           searchedLocsPerLine.push({vertical: v, horizontal: loc.horizontal})
-          break
         }
       }
     }
@@ -205,13 +205,13 @@ class Reversi {
         } else if (searchedStone === playerNum) {
           // 自分の色だったら
           reversibleStoneLocs.push(...searchedLocsPerLine)
+          break
         } else {
           // 敵の色だったら
           searchedLocsPerLine.push({
             vertical: loc.vertical + offset,
             horizontal: loc.horizontal + offset
           })
-          break
         }
       }
       offset++
@@ -240,13 +240,13 @@ class Reversi {
         } else if (searchedStone === playerNum) {
           // 自分の色だったら
           reversibleStoneLocs.push(...searchedLocsPerLine)
+          break
         } else {
           // 敵の色だったら
           searchedLocsPerLine.push({
             vertical: loc.vertical - offset,
             horizontal: loc.horizontal - offset
           })
-          break
         }
       }
       offset++
@@ -275,13 +275,13 @@ class Reversi {
         } else if (searchedStone === playerNum) {
           // 自分の色だったら
           reversibleStoneLocs.push(...searchedLocsPerLine)
+          break
         } else {
           // 敵の色だったら
           searchedLocsPerLine.push({
             vertical: loc.vertical + offset,
             horizontal: loc.horizontal - offset
           })
-          break
         }
       }
       offset++
@@ -310,13 +310,13 @@ class Reversi {
         } else if (searchedStone === playerNum) {
           // 自分の色だったら
           reversibleStoneLocs.push(...searchedLocsPerLine)
+          break
         } else {
           // 敵の色だったら
           searchedLocsPerLine.push({
             vertical: loc.vertical - offset,
             horizontal: loc.horizontal + offset
           })
-          break
         }
       }
       offset++
