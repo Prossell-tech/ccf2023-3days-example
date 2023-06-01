@@ -51,6 +51,7 @@ class Reversi {
         horizontal: undefined
       }
     }
+    this.isProcessing = false
   }
 
   canSetStone(playerNum, loc) {
@@ -397,11 +398,12 @@ class Reversi {
       const cellRow = document.createElement('div')
       cellRow.className = 'flex'
       for (let h = 0; h < FIELD_SIZE_HORIZONTAL; h++) {
-        const isAvailable = this.canSetStone(PLAYER_STONE, {vertical: v, horizontal: h})
+        const isAvailable = this.canSetStone(PLAYER_STONE, {vertical: v, horizontal: h}) && !this.isProcessing
         const cell = document.createElement('div')
         cell.className = `cell ${isAvailable ? 'pointer' : 'not-allowed'} ${isAvailable && HIGHLIGHT_AVAILABLE_CELL ? 'highlighted-cell' : ''}`
         cell.onclick = async () => {
           if (!isAvailable) return
+          this.isProcessing = true
           // 自分のターン開始
           this.setStone(PLAYER_STONE, {vertical: v, horizontal: h})
           this.reverse()
@@ -411,11 +413,14 @@ class Reversi {
           // プレイヤーが打てず、コンピュータが打てる間、コンピュータが打ち続ける
           document.getElementById('player-indicator').innerText = 'コンピュータの番です'
           do {
-            await new Promise(resolve => setTimeout(resolve, COMPUTER_AWAIT_MS));
-            this.playByComputer()
-            this.reverse()
-            this.emptyCellRowContainer()
-            this.renderStage()
+            console.log('!this.canPlay(PLAYER_STONE), !this.canPlay(flip1and2(PLAYER_STONE)), this', !this.canPlay(PLAYER_STONE), !this.canPlay(flip1and2(PLAYER_STONE)), this)
+            if (this.canPlay(flip1and2(PLAYER_STONE))){
+              await new Promise(resolve => setTimeout(resolve, COMPUTER_AWAIT_MS));
+              this.playByComputer()
+              this.reverse()
+              this.emptyCellRowContainer()
+              this.renderStage()
+            }
           } while (!this.canPlay(PLAYER_STONE) && this.canPlay(flip1and2(PLAYER_STONE)))
 
           // 両者打てないなら、ゲームを終了する。
@@ -424,6 +429,9 @@ class Reversi {
             this.renderWinner()
           } else {
             document.getElementById('player-indicator').innerText = 'プレイヤーの番です'
+            this.isProcessing = false
+            this.emptyCellRowContainer()
+            this.renderStage()
           }
         }
         const stoneImg = document.createElement('img')
