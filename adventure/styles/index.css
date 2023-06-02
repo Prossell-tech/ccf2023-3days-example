@@ -26,7 +26,7 @@ body {
 
 .surface {
     width: 200vw;
-    height: 73px;
+    height: 74px;
     position: absolute;
     left: 2px;
     bottom: 0;
@@ -39,9 +39,6 @@ body {
     width: 100vw;
     height: 100vh;
     position: relative;
-    border-color: red;
-    border-width: 1px;
-    border-style: solid;
 }
 
 .landscape {
