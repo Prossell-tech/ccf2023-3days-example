@@ -56,6 +56,6 @@ body {
 
 .path-to-underground {
     width: 100vw;
-    height: 100vh;
-
+    height: 200vh;
+    background: linear-gradient(chocolate, darkblue);
 }
