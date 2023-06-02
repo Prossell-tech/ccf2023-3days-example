@@ -27,3 +27,27 @@ div.flex {
     cursor: pointer;
 }
 
+.highlighted-cell {
+    background-color: lightgreen;
+}
+
+.winner-indicator-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+#winner-indicator {
+    font-size: x-large;
+}
+
+.player-indicator-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+#player-indicator {
+    font-size: large;
+}
+

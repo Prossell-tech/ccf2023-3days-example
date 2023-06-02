@@ -1,3 +1,4 @@
+const HIGHLIGHT_AVAILABLE_CELL = true
 const COMPUTER_AWAIT_MS = 500
 const PLAYER_STONE = 2  // 1: 白、 2: 黒
 const FIELD_SIZE_VERTICAL = 8
@@ -50,9 +51,10 @@ class Reversi {
         horizontal: undefined
       }
     }
+    this.isProcessing = false
   }
 
-  canSetStone(playerNum, loc){
+  canSetStone(playerNum, loc) {
     const isVerticalOk = 0 <= loc.vertical && loc.vertical < FIELD_SIZE_VERTICAL
     const isHorizontalOk = 0 <= loc.horizontal && loc.horizontal < FIELD_SIZE_HORIZONTAL
     const isPlayerNumOk = playerNum === 1 || playerNum === 2
@@ -332,19 +334,59 @@ class Reversi {
     }
   }
 
-  playByComputer() {
-    while (true) {
-      const v = getRandInt(FIELD_SIZE_VERTICAL)
-      const h = getRandInt(FIELD_SIZE_HORIZONTAL)
-      if (this.canSetStone(flip1and2(PLAYER_STONE), {vertical: v, horizontal: h})) {
-        this.setStone(flip1and2(PLAYER_STONE), {vertical: v, horizontal: h})
-        break
+  canPlay(playerNum) {
+    for (let v = 0; v < FIELD_SIZE_VERTICAL; v++) {
+      for (let h = 0; h < FIELD_SIZE_HORIZONTAL; h++) {
+        if (this.canSetStone(playerNum, {vertical: v, horizontal: h})) return true
       }
     }
+    return false
+  }
+
+  getAvailableLocs(playerNum) {
+    const out = []
+    for (let v = 0; v < FIELD_SIZE_VERTICAL; v++) {
+      for (let h = 0; h < FIELD_SIZE_HORIZONTAL; h++) {
+        const loc = {vertical: v, horizontal: h}
+        if (this.canSetStone(playerNum, loc)) out.push(loc)
+      }
+    }
+    return out
+  }
+
+  playByComputer() {
+    const availableLocs = this.getAvailableLocs(flip1and2(PLAYER_STONE))
+    console.assert(availableLocs.length)
+    const index = getRandInt(availableLocs.length)
+    this.setStone(flip1and2(PLAYER_STONE), availableLocs[index])
+  }
+
+  getNumStones() {
+    const out = {'1': 0, '2': 0}
+    for (let v = 0; v < FIELD_SIZE_VERTICAL; v++) {
+      for (let h = 0; h < FIELD_SIZE_HORIZONTAL; h++) {
+        out[String(this.stage[v][h])]++
+      }
+    }
+    return out
   }
 
 
   // ---------------------DOM操作系------------------------
+  renderWinner() {
+    const winnerIndicator = document.getElementById('winner-indicator')
+    const numStones = this.getNumStones()
+    const numPlayerStones = numStones[String(PLAYER_STONE)]
+    const numComputerStones = numStones[String(flip1and2(PLAYER_STONE))]
+    if (numPlayerStones === numComputerStones) {
+      winnerIndicator.innerText = '引き分け'
+    } else if (numPlayerStones > numComputerStones) {
+      winnerIndicator.innerText = '勝者: プレイヤー'
+    } else {
+      winnerIndicator.innerText = '勝者: コンピュータ'
+    }
+  }
+
   emptyCellRowContainer() {
     const cellRowContainer = document.getElementById('cell-row-container')
     cellRowContainer.innerText = ''
@@ -356,20 +398,41 @@ class Reversi {
       const cellRow = document.createElement('div')
       cellRow.className = 'flex'
       for (let h = 0; h < FIELD_SIZE_HORIZONTAL; h++) {
-        const isAvailable = this.canSetStone(PLAYER_STONE, {vertical: v, horizontal: h})
+        const isAvailable = this.canSetStone(PLAYER_STONE, {vertical: v, horizontal: h}) && !this.isProcessing
         const cell = document.createElement('div')
-        cell.className = `cell + ${isAvailable ? 'pointer' : 'not-allowed'}`
+        cell.className = `cell ${isAvailable ? 'pointer' : 'not-allowed'} ${isAvailable && HIGHLIGHT_AVAILABLE_CELL ? 'highlighted-cell' : ''}`
         cell.onclick = async () => {
           if (!isAvailable) return
+          this.isProcessing = true
+          // 自分のターン開始
           this.setStone(PLAYER_STONE, {vertical: v, horizontal: h})
           this.reverse()
           this.emptyCellRowContainer()
           this.renderStage()
-          await new Promise(resolve => setTimeout(resolve, COMPUTER_AWAIT_MS));
-          this.playByComputer()
-          this.reverse()
-          this.emptyCellRowContainer()
-          this.renderStage()
+
+          // プレイヤーが打てず、コンピュータが打てる間、コンピュータが打ち続ける
+          document.getElementById('player-indicator').innerText = 'コンピュータの番です'
+          do {
+            console.log('!this.canPlay(PLAYER_STONE), !this.canPlay(flip1and2(PLAYER_STONE)), this', !this.canPlay(PLAYER_STONE), !this.canPlay(flip1and2(PLAYER_STONE)), this)
+            if (this.canPlay(flip1and2(PLAYER_STONE))){
+              await new Promise(resolve => setTimeout(resolve, COMPUTER_AWAIT_MS));
+              this.playByComputer()
+              this.reverse()
+              this.emptyCellRowContainer()
+              this.renderStage()
+            }
+          } while (!this.canPlay(PLAYER_STONE) && this.canPlay(flip1and2(PLAYER_STONE)))
+
+          // 両者打てないなら、ゲームを終了する。
+          if (!this.canPlay(PLAYER_STONE) && !this.canPlay(flip1and2(PLAYER_STONE))) {
+            document.getElementById('player-indicator').innerText = 'ゲーム終了'
+            this.renderWinner()
+          } else {
+            document.getElementById('player-indicator').innerText = 'プレイヤーの番です'
+            this.isProcessing = false
+            this.emptyCellRowContainer()
+            this.renderStage()
+          }
         }
         const stoneImg = document.createElement('img')
         if (this.stage[v][h] === 1) {
