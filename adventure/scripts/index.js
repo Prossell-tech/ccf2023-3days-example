@@ -9,7 +9,7 @@ gsap.to(landscapeContainer, {
   scrollTrigger: {
     trigger: '.ground',
     start: 'top top',
-    end: () => `-=${landscapeContainer.clientWidth - ground.clientWidth}`,
+    end: () => `-=${landscapeContainer.clientWidth - ground.clientWidth}`,  // landscapeContainerがgroundの外に出た瞬間に終わる
     scrub: true,
     pin: true,
     anticipatePin: 1,
