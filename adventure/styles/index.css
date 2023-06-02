@@ -26,8 +26,9 @@ body {
 
 .surface {
     width: 200vw;
-    height: 90px;
+    height: 73px;
     position: absolute;
+    left: 2px;
     bottom: 0;
     background-image: url("../images/mario-road.gif");
     background-size: 30px 30px;
@@ -36,12 +37,16 @@ body {
 
 .landscape-container {
     width: 100vw;
+    height: 100vh;
     position: relative;
-    display: grid;
+    border-color: red;
+    border-width: 1px;
+    border-style: solid;
 }
 
 .landscape {
-    width: 100px;
-    height: 100px;
+    width: 30px;
+    height: 30px;
     object-fit: contain;
+    position: absolute;
 }
