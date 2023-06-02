@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <title>Adventure</title>
     <link rel="stylesheet" type="text/css" href="styles/index.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/ScrollTrigger.min.js"></script>
 </head>
 <body>
+<script type="module" src="scripts/index.js"></script>
 <div class="ground">
     <div class="cloud-container">
-        <img class="cloud" src="images/mario-cloud.gif" alt="cloud" style="top: 2rem; left: 32rem"/>
-        <img class="cloud" src="images/mario-cloud.gif" alt="cloud" style="top: 2rem; left: 48rem"/>
+        <img class="cloud" src="images/nc165890.png" alt="cloud" style="top: 2rem; left: 32rem"/>
+        <img class="cloud" src="images/nc165890.png" alt="cloud" style="top: 2rem; left: 48rem"/>
     </div>
 
     <!--  地面  -->
@@ -17,8 +20,41 @@
 
     <!--  レンガ、アイテムボックスなど  -->
     <div class="landscape-container">
-        <img src="images/mario-renga.gif" alt="renga" class="landscape"
-             style="bottom: calc(30px * 3); left: calc(30px * 4)"/>
+        <!--   アイテムボックス     -->
+        <img src="images/j302_3_1.jpg" alt="item-block" class="landscape"
+             style="bottom: calc(30px * 6); left: calc(30px * 14)"/>
+        <img src="images/j302_3_1.jpg" alt="item-block" class="landscape"
+             style="bottom: calc(30px * 6); left: calc(30px * 19)"/>
+        <img src="images/j302_3_1.jpg" alt="item-block" class="landscape"
+             style="bottom: calc(30px * 6); left: calc(30px * 21)"/>
+        <img src="images/j302_3_1.jpg" alt="item-block" class="landscape"
+             style="bottom: calc(30px * 10); left: calc(30px * 20)"/>
+
+        <!--    レンガ    -->
+        <img src="images/pattern-1929506_1280.webp" alt="renga" class="landscape"
+             style="bottom: calc(30px * 6); left: calc(30px * 18)"/>
+        <img src="images/pattern-1929506_1280.webp" alt="renga" class="landscape"
+             style="bottom: calc(30px * 6); left: calc(30px * 20)"/>
+        <img src="images/pattern-1929506_1280.webp" alt="renga" class="landscape"
+             style="bottom: calc(30px * 6); left: calc(30px * 22)"/>
+
+        <!--    土管 1本ごとに空行を空けている   -->
+        <img src="images/super-mario-brothers-147465_1280.webp" alt="dokan" class="dokan"
+             style="bottom: calc(30px * 3); left: calc(30px * 26); height: calc(30px * 2)"/>
+
+        <!--    長い土管は重ねて作る    -->
+        <img src="images/super-mario-brothers-147465_1280.webp" alt="dokan" class="dokan"
+             style="bottom: calc(30px * 4); left: calc(30px * 36); height: calc(30px * 2); z-index: 1"/>
+        <img src="images/super-mario-brothers-147465_1280.webp" alt="dokan" class="dokan"
+             style="bottom: calc(30px * 3); left: calc(30px * 36); height: calc(30px * 2);"/>
+
+        <img src="images/super-mario-brothers-147465_1280.webp" alt="dokan" class="dokan"
+             style="bottom: calc(30px * 5); left: calc(30px * 45); height: calc(30px * 2); z-index: 2"/>
+        <img src="images/super-mario-brothers-147465_1280.webp" alt="dokan" class="dokan"
+             style="bottom: calc(30px * 4); left: calc(30px * 45); height: calc(30px * 2); z-index: 1"/>
+        <img src="images/super-mario-brothers-147465_1280.webp" alt="dokan" class="dokan"
+             style="bottom: calc(30px * 3); left: calc(30px * 45); height: calc(30px * 2);"/>
+
     </div>
 </div>
 </body>

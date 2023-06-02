@@ -1,7 +1,7 @@
 body {
     margin: 0;
-    width: 200vw;
-    height: 200vh;
+    width: 100vw;
+    height: calc(300vh + 200vw);
 }
 
 .ground {
@@ -9,6 +9,7 @@ body {
     width: 100%;
     height: 100vh;
     padding: 0;
+    position: relative;
 }
 
 .cloud-container {
@@ -26,12 +27,11 @@ body {
 
 .surface {
     width: 200vw;
-    height: 74px;
+    height: 92px;
     position: absolute;
     left: 2px;
     bottom: 0;
-    background-image: url("../images/mario-road.gif");
-    background-size: 30px 30px;
+    background-color: chocolate;
 }
 
 
@@ -46,4 +46,11 @@ body {
     height: 30px;
     object-fit: contain;
     position: absolute;
+}
+
+.dokan {
+    width: 60px;
+    object-fit: contain;
+    position: absolute;
+    background-color: dodgerblue;
 }
