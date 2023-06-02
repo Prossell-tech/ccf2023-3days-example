@@ -24,13 +24,22 @@ body {
 }
 
 
-.surface {
+.ground .surface {
     width: 100vw;
     height: 92px;
     position: absolute;
     left: 2px;
     bottom: 0;
     background-color: chocolate;
+}
+
+.underground .surface {
+    width: 100vw;
+    height: 92px;
+    position: absolute;
+    left: 2px;
+    bottom: 0;
+    background-color: darkcyan;
 }
 
 
@@ -57,5 +66,13 @@ body {
 .path-to-underground {
     width: 100vw;
     height: 200vh;
-    background: linear-gradient(chocolate, darkblue);
+    background: linear-gradient(chocolate, black);
+}
+
+.underground {
+    background-color: black;
+    width: 200vw;
+    height: 100vh;
+    padding: 0;
+    position: relative;
 }
