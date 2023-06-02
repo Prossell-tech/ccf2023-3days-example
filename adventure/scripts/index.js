@@ -14,7 +14,6 @@ gsap.to(groundLandscapeContainer, {
     pin: true,
     anticipatePin: 1,
     invalidateOnRefresh: true,
-    markers: true
   },
 });
 
@@ -32,6 +31,32 @@ gsap.to(undergroundLandscapeContainer, {
     pin: true,
     anticipatePin: 1,
     invalidateOnRefresh: true,
-    markers: true
   },
+});
+
+// ゴール時におめでとう表示
+const allHeight = Math.max(
+  document.body.scrollHeight, document.documentElement.scrollHeight,
+  document.body.offsetHeight, document.documentElement.offsetHeight,
+  document.body.clientHeight, document.documentElement.clientHeight
+);
+const mostBottom = allHeight - window.innerHeight;
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY || document.documentElement.scrollTop;
+  if (scrollTop >= mostBottom) {
+    const congratulationsAnimation = document.createElement('img')
+    congratulationsAnimation.src = 'images/congratulations.webp'
+    congratulationsAnimation.alt = 'congratulations'
+    congratulationsAnimation.className = 'congratulations-animation'
+    const congratulationsTextContainer = document.createElement('div')
+    congratulationsTextContainer.className = 'congratulations-text-container'
+    const congratulationsText = document.createElement('p')
+    congratulationsText.className = 'congratulations-text'
+    congratulationsText.innerText = 'CONGRATULATIONS!!'
+    congratulationsTextContainer.appendChild(congratulationsText)
+    const container = document.querySelector('.congratulations-container')
+    container.innerHTML = ''
+    container.appendChild(congratulationsAnimation)
+    container.appendChild(congratulationsTextContainer)
+  }
 });

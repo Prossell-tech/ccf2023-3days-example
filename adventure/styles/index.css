@@ -3,13 +3,6 @@ body {
     width: 200vw;
 }
 
-#mario {
-    width: 30px;
-    height: 30px;
-    object-fit: contain;
-    position: absolute;
-}
-
 .ground {
     background-color: dodgerblue;
     width: 200vw;
@@ -89,4 +82,34 @@ body {
     height: 100vh;
     padding: 0;
     position: relative;
+}
+
+.congratulations-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 90vh;
+    position: relative;
+    left: 100vw;
+}
+
+.congratulations-animation {
+    width: 100vw;
+    height: 90vh;
+    object-fit: cover;
+    position: absolute;
+}
+
+.congratulations-text-container {
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+}
+
+.congratulations-text {
+    object-fit: cover;
+    font-family: Titan One;
+    font-size: 80px;
+    color: darkorange;
 }
