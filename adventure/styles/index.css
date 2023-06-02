@@ -3,6 +3,13 @@ body {
     width: 200vw;
 }
 
+#mario {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    position: absolute;
+}
+
 .ground {
     background-color: dodgerblue;
     width: 200vw;
@@ -26,7 +33,7 @@ body {
 
 .ground .surface {
     width: 100vw;
-    height: 92px;
+    height: 90px;
     position: absolute;
     left: 2px;
     bottom: 0;
@@ -35,7 +42,7 @@ body {
 
 .underground .surface {
     width: 100vw;
-    height: 92px;
+    height: 90px;
     position: absolute;
     left: 2px;
     bottom: 0;
@@ -56,11 +63,18 @@ body {
     position: absolute;
 }
 
-.dokan {
+.ground .landscape-container .dokan {
     width: 60px;
     object-fit: contain;
     position: absolute;
     background-color: dodgerblue;
+}
+
+.underground .landscape-container .dokan {
+    width: 60px;
+    object-fit: contain;
+    position: absolute;
+    background-color: black;
 }
 
 .path-to-underground {
