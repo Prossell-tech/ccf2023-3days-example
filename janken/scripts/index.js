@@ -37,5 +37,3 @@ const handleClick = (playerCard) => {
   const result = getBattleResult(playerCard, computerCard)
   document.getElementById('battle-result').innerText = result
 }
-
-console.log(getBattleResult('gu', 'pa'))
