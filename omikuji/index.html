@@ -1,32 +1,27 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
+  <head>
     <title>おみくじアプリ</title>
-</head>
-<body>
-<h1>おみくじアプリ</h1>
-<div style="border-width: 2px; border-style: solid">
-<p id="result"></p>
-</div>
-<button id="drawBtn">おみくじを引く</button>
+  </head>
+  <body style="text-align: center">
+    <h1>おみくじアプリ</h1>
+    <div
+      style="border-width: 2px; border-style: solid; width: 200px; margin: auto"
+    >
+      <p id="result"></p>
+    </div>
+    <button id="drawBtn" style="margin-top: 2rem">おみくじを引く</button>
 
-<script>
-  const drawBtn = document.getElementById('drawBtn');
-  const resultElement = document.getElementById('result');
-  const fortunes = [
-    "大吉",
-    "中吉",
-    "小吉",
-    "吉",
-    "凶",
-    "大凶"
-  ];
+    <script>
+      const drawBtn = document.getElementById("drawBtn");
+      const resultElement = document.getElementById("result");
+      const fortunes = ["大吉", "中吉", "小吉", "吉", "凶", "大凶"];
 
-  drawBtn.addEventListener('click', function() {
-    const randomIndex = Math.floor(Math.random() * fortunes.length);
-    const fortune = fortunes[randomIndex];
-    resultElement.textContent = "結果：" + fortune;
-  });
-</script>
-</body>
+      drawBtn.addEventListener("click", function () {
+        const randomIndex = Math.floor(Math.random() * fortunes.length);
+        const fortune = fortunes[randomIndex];
+        resultElement.textContent = "結果：" + fortune;
+      });
+    </script>
+  </body>
 </html>
