@@ -1,39 +1,37 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>フラッシュ暗算</title>
-    <link rel="stylesheet" type="text/css" href="styles/index.css">
-</head>
-<body>
-<script src="scripts/index.js"></script>
-<div class="flex column center">
-    <div class="flex column end">
+    <link rel="stylesheet" type="text/css" href="styles/index.css" />
+  </head>
+  <body>
+    <script src="scripts/index.js"></script>
+    <div class="flex column center">
+      <div id="main-container"></div>
+      <div class="flex column end">
         <div class="flex">
-            <label for="displayed-sec">数字1つにつき</label>
-            <input id="displayed-sec" type="number" value="1"/>
-            <p>秒</p>
+          <label for="displayed-sec">数字1つにつき</label>
+          <input id="displayed-sec" type="number" value="1" />
+          <p>秒</p>
         </div>
         <div class="flex">
-            <label for="displayed-digits">最大</label>
-            <input id="displayed-digits" type="number" value="1"/>
-            <p>桁</p>
+          <label for="displayed-digits">最大</label>
+          <input id="displayed-digits" type="number" value="1" />
+          <p>桁</p>
         </div>
         <div class="flex">
-            <label for="displayed-times">足す数</label>
-            <input id="displayed-times" type="number" value="3"/>
-            <p>個</p>
+          <label for="displayed-times">足す数</label>
+          <input id="displayed-times" type="number" value="3" />
+          <p>個</p>
         </div>
-    </div>
-    <button id="start" onclick="mentalMath.flash()">
-        スタート
-    </button>
-    <div id="main-container"></div>
-    <div id="answer-container">
+      </div>
+      <button id="start" onclick="mentalMath.flash()">スタート</button>
+      <div id="answer-container">
         <label for="answer">答えは</label>
         <input id="answer" type="number" />
         <button onclick="mentalMath.answer()">回答する</button>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>

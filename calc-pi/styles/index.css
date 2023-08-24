@@ -1,16 +1,20 @@
 div.flex {
-    display: flex;
+  display: flex;
 }
 
 div.column {
-    flex-direction: column;
+  flex-direction: column;
 }
 
 div.start {
-    align-items: start;
+  align-items: start;
 }
 
 div.center {
-    align-items: center;
-    justify-content: center;
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  margin-left: 1rem;
 }

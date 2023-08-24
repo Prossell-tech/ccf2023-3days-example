@@ -1,19 +1,21 @@
 div.flex {
-    display: flex;
+  display: flex;
+  margin-top: 3rem;
 }
 
 div.center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 div.column {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 div.button-container {
-    display: grid;
-    grid-template-columns: 50px 50px 50px;
+  display: grid;
+  grid-template-columns: 100px 100px 100px;
+  grid-template-rows: 30px 30px 30px 30px 30px;
 }
