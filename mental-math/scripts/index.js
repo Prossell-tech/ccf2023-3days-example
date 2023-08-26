@@ -1,3 +1,5 @@
+const INTERVAL_MS = 100;
+
 const getRandInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
 class MentalMath {
@@ -14,8 +16,11 @@ class MentalMath {
     for (let _ = 0; _ < numNumbers; _++) {
       const num = getRandInt(1, maxNumber)
       this.numbers.push(num)
-      document.getElementById('main-container').innerText = num.toString()
+      const mainContainer = document.getElementById('main-container')
+      mainContainer.innerText = num.toString()
       await new Promise(resolve => setTimeout(resolve, milliSecPerNumber))
+      mainContainer.innerText = ''
+      await new Promise(resolve => setTimeout(resolve, INTERVAL_MS))
     }
     document.getElementById('main-container').innerText = ''
   }
